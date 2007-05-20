@@ -4,7 +4,7 @@
 Summary:        Multiple-precision floating-point computations with correct rounding
 Name:           mpfr
 Version:        2.2.1
-Release:        %mkrel 4
+Release:        %mkrel 5
 Epoch:          0
 License:        LGPL 
 Group:          System/Libraries
@@ -69,7 +69,7 @@ The development headers and libraries for the MPFR library.
 %defattr(0644,root,root,0755)
 %doc AUTHORS BUGS COPYING COPYING.LIB ChangeLog FAQ.html INSTALL NEWS README TODO VERSION
 %defattr(-,root,root,0755)
-%{_libdir}/libmpfr.so.*
+%{_libdir}/libmpfr.so.%{lib_major}*
 
 %files -n %{lib_name}-devel
 %defattr(-,root,root,0755)
