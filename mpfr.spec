@@ -1,7 +1,7 @@
 %define lib_major               1
 %define lib_name                %mklibname %{name} %{lib_major}
-%define lib_name_devel          %mklibname %{name} %{lib_major} -d
-%define lib_name_static_devel   %mklibname %{name} %{lib_major} -d -s
+%define lib_name_devel          %mklibname %{name} -d
+%define lib_name_static_devel   %mklibname %{name} -d -s
 
 Summary:        Multiple-precision floating-point computations with correct rounding
 Name:           mpfr
@@ -34,8 +34,8 @@ Requires(post): info-install
 Requires(preun): info-install
 Requires:       %{lib_name} = %{epoch}:%{version}-%{release}
 Provides:       lib%{name}-devel = %{epoch}:%{version}-%{release}
-Provides:       %{_lib}%{name}-devel = %{epoch}:%{version}-%{release}
 Provides:       %{name}-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	%mklibname -d %name 1
 
 %description -n %{lib_name_devel}
 The development headers and libraries for the MPFR library.
@@ -45,8 +45,8 @@ Summary:        Static libraries for MPFR
 Group:          Development/C
 Requires:       %{lib_name}-devel = %{epoch}:%{version}-%{release}
 Provides:       lib%{name}-static-devel = %{epoch}:%{version}-%{release}
-Provides:       %{_lib}%{name}-static-devel = %{epoch}:%{version}-%{release}
 Provides:       %{name}-static-devel = %{epoch}:%{version}-%{release}
+Obsoletes:	%mklibname -d -s %name 1
 
 %description -n %{lib_name_static_devel}
 Static libraries for the MPFR library.
