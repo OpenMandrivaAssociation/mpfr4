@@ -43,7 +43,7 @@ The development headers and libraries for the MPFR library.
 %package -n %{lib_name_static_devel}
 Summary:        Static libraries for MPFR
 Group:          Development/C
-Requires:       %{lib_name}-devel = %{epoch}:%{version}-%{release}
+Requires:       %{lib_name_devel} = %{epoch}:%{version}-%{release}
 Provides:       lib%{name}-static-devel = %{epoch}:%{version}-%{release}
 Provides:       %{name}-static-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	%mklibname -d -s %name 1
