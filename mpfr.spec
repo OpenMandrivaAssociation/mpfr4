@@ -80,7 +80,7 @@ Static libraries for the MPFR library.
 
 %files -n %{lib_name}
 %defattr(0644,root,root,0755)
-%doc AUTHORS BUGS COPYING COPYING.LIB ChangeLog FAQ.html INSTALL NEWS README TODO VERSION
+%doc AUTHORS BUGS COPYING COPYING.LIB FAQ.html INSTALL NEWS README TODO VERSION
 %defattr(-,root,root,0755)
 %{_libdir}/libmpfr.so.%{lib_major}*
 
