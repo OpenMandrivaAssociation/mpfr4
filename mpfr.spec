@@ -4,14 +4,14 @@
 %define lib_name_static_devel   %mklibname %{name} -d -s
 
 Name:           mpfr
-Version:        2.3.1
-Release:        %mkrel 2
+Version:        2.3.2
+Release:        %mkrel 1
 Epoch:          0
 Summary:        Multiple-precision floating-point computations with correct rounding
 License:        LGPL 
 Group:          System/Libraries
 URL:            http://www.mpfr.org/
-Source0:        http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.bz2
+Source0:        http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.lzma
 BuildRequires:  libgmp-devel
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
