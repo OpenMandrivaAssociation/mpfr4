@@ -4,7 +4,7 @@
 %define lib_name_static_devel   %mklibname %{name} -d -s
 
 Name:           mpfr
-Version:        2.3.2
+Version:        2.4.0
 Release:        %mkrel 1
 Epoch:          0
 Summary:        Multiple-precision floating-point computations with correct rounding
@@ -55,7 +55,9 @@ Static libraries for the MPFR library.
 %setup -q
 
 %build
-%{configure2_5x} --enable-shared
+%{configure2_5x} \
+	--enable-shared \
+	--enable-thread-safe
 %{make}
 
 %install
