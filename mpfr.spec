@@ -5,13 +5,13 @@
 
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
-Version:	2.4.1
-Release:	%mkrel 2
+Version:	2.4.2
+Release:	%mkrel 1
 Epoch:		0
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://www.mpfr.org/
-Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.lzma
+Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
 BuildRequires:	libgmp-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -87,11 +87,14 @@ make check
 
 %files -n %{lib_name}
 %defattr(-,root,root)
-%doc AUTHORS BUGS FAQ.html NEWS README TODO VERSION
+%doc %dir %{_docdir}/%{name}
+%doc %{_docdir}/%{name}/[A-Z]*
 %{_libdir}/libmpfr.so.%{lib_major}*
 
 %files -n %{lib_name_devel}
 %defattr(-,root,root)
+%dir %{_docdir}/%{name}/examples
+%{_docdir}/%{name}/examples/*
 %{_includedir}/mpfr.h
 %{_includedir}/mpf2mpfr.h
 %{_infodir}/mpfr.info*
