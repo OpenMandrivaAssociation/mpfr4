@@ -6,7 +6,7 @@
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.0.0
-Release:	%mkrel 2
+Release:	%mkrel 3
 Epoch:		0
 License:	LGPLv3+
 Group:		System/Libraries
@@ -23,7 +23,6 @@ floating-point computations with correct rounding.
 %package -n %{lib_name}
 Summary:	Multiple-precision floating-point computations with correct rounding
 Group:		System/Libraries
-Obsoletes:	%mklibname %name 1
 
 %description -n %{lib_name}
 The MPFR library is a C library for multiple-precision
@@ -68,6 +67,9 @@ Static libraries for the MPFR library.
 %{__rm} -rf %{buildroot}
 %makeinstall_std
 
+rm -rf installed-docs
+mv %{buildroot}%{_docdir}/%{name} installed-docs
+
 %check
 make check
 
@@ -90,14 +92,11 @@ make check
 
 %files -n %{lib_name}
 %defattr(-,root,root)
-%doc %dir %{_docdir}/%{name}
-%doc %{_docdir}/%{name}/*
 %{_libdir}/libmpfr.so.%{lib_major}*
 
 %files -n %{lib_name_devel}
 %defattr(-,root,root)
-%dir %{_docdir}/%{name}/examples
-%{_docdir}/%{name}/examples/*
+%doc installed-docs/*
 %{_includedir}/mpfr.h
 %{_includedir}/mpf2mpfr.h
 %{_infodir}/mpfr.info*
