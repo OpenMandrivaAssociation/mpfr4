@@ -6,7 +6,7 @@
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.0
-Release:	3
+Release:	4
 Epoch:		0
 License:	LGPLv3+
 Group:		System/Libraries
@@ -64,8 +64,6 @@ Static libraries for the MPFR library.
 
 rm -rf installed-docs
 mv %{buildroot}%{_docdir}/%{name} installed-docs
-
-rm -f %{buildroot}%{_libdir}/libmpfr.la
 
 %check
 make check
