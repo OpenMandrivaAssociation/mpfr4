@@ -12,7 +12,7 @@ License:	LGPLv3+
 Group:		System/Libraries
 URL:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
-BuildRequires:	libgmp-devel
+BuildRequires:	gmp-devel
 
 %description
 The MPFR library is a C library for multiple-precision
