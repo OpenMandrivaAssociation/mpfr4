@@ -6,7 +6,7 @@
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.1
-Release:	1
+Release:	3
 Epoch:		0
 License:	LGPLv3+
 Group:		System/Libraries
