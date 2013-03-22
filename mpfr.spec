@@ -2,6 +2,7 @@
 %define lib_name		%mklibname %{name} %{lib_major}
 %define lib_name_devel		%mklibname %{name} -d
 %define lib_name_static_devel	%mklibname %{name} -d -s
+%bcond_with	crosscompile
 
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
@@ -54,6 +55,9 @@ Static libraries for the MPFR library.
 %build
 %configure2_5x \
 	--enable-shared \
+%if %{with crosscompile}
+	--with-gmp-lib=%{_prefix}/%{_target_platform}/sys-root%{_libdir} \
+%endif
 	--enable-thread-safe
 
 %make
