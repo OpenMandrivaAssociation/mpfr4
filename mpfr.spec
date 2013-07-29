@@ -1,17 +1,16 @@
-%define lib_major		4
-%define lib_name		%mklibname %{name} %{lib_major}
-%define lib_name_devel		%mklibname %{name} -d
-%define lib_name_static_devel	%mklibname %{name} -d -s
+%define major	4
+%define libname	%mklibname %{name} %{major}
+%define devname	%mklibname %{name} -d
+%define statname mklibname %{name} -d -s
 %bcond_with	crosscompile
 
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.2
 Release:	1
-Epoch:		0
 License:	LGPLv3+
 Group:		System/Libraries
-URL:		http://www.mpfr.org/
+Url:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
 BuildRequires:	gmp-devel
 
@@ -19,34 +18,30 @@ BuildRequires:	gmp-devel
 The MPFR library is a C library for multiple-precision
 floating-point computations with correct rounding. 
 
-%package -n %{lib_name}
+%package -n %{libname}
 Summary:	Multiple-precision floating-point computations with correct rounding
 Group:		System/Libraries
 
-%description -n %{lib_name}
+%description -n %{libname}
 The MPFR library is a C library for multiple-precision
 floating-point computations with correct rounding. 
 
-%package -n %{lib_name_devel}
+%package -n %{devname}
 Summary:	Development headers and libraries for MPFR
 Group:		Development/C
-Requires:	%{lib_name} = %{EVRD}
-Provides:	lib%{name}-devel = %{EVRD}
+Requires:	%{libname} = %{EVRD}
 Provides:	%{name}-devel = %{EVRD}
-Obsoletes:	%mklibname -d %{name} 1
 
-%description -n %{lib_name_devel}
+%description -n %{devname}
 The development headers and libraries for the MPFR library.
 
-%package -n %{lib_name_static_devel}
+%package -n %{statname}
 Summary:	Static libraries for MPFR
 Group:		Development/C
-Requires:	%{lib_name_devel} = %{EVRD}
-Provides:	lib%{name}-static-devel = %{EVRD}
+Requires:	%{devname} = %{EVRD}
 Provides:	%{name}-static-devel = %{EVRD}
-Obsoletes:	%mklibname -d -s %{name} 1
 
-%description -n %{lib_name_static_devel}
+%description -n %{statname}
 Static libraries for the MPFR library.
 
 %prep
@@ -63,7 +58,6 @@ Static libraries for the MPFR library.
 %make
 
 %install
-%__rm -rf %{buildroot}
 %makeinstall_std
 
 rm -rf installed-docs
@@ -72,15 +66,16 @@ mv %{buildroot}%{_docdir}/%{name} installed-docs
 %check
 make check
 
-%files -n %{lib_name}
-%{_libdir}/libmpfr.so.%{lib_major}*
+%files -n %{libname}
+%{_libdir}/libmpfr.so.%{major}*
 
-%files -n %{lib_name_devel}
+%files -n %{devname}
 %doc installed-docs/*
 %{_includedir}/mpfr.h
 %{_includedir}/mpf2mpfr.h
 %{_infodir}/mpfr.info*
 %{_libdir}/libmpfr.so
 
-%files -n %{lib_name_static_devel}
+%files -n %{statname}
 %{_libdir}/libmpfr.a
+
