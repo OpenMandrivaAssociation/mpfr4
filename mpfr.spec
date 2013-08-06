@@ -1,7 +1,7 @@
 %define major	4
 %define libname	%mklibname %{name} %{major}
 %define devname	%mklibname %{name} -d
-%define statname mklibname %{name} -d -s
+%define statname %mklibname %{name} -d -s
 %bcond_with	crosscompile
 
 Summary:	Multiple-precision floating-point computations with correct rounding
