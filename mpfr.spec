@@ -1,4 +1,4 @@
-%define major	4
+%define major 4
 %define libname	%mklibname %{name} %{major}
 %define devname	%mklibname %{name} -d
 %define statname %mklibname %{name} -d -s
@@ -7,7 +7,7 @@
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.2
-Release:	2
+Release:	3
 License:	LGPLv3+
 Group:		System/Libraries
 Url:		http://www.mpfr.org/
