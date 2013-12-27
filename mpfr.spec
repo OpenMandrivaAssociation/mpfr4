@@ -50,6 +50,7 @@ Static libraries for the MPFR library.
 %build
 %configure2_5x \
 	--enable-shared \
+	--enable-static \
 %if %{with crosscompile}
 	--with-gmp-lib=%{_prefix}/%{_target_platform}/sys-root%{_libdir} \
 %endif
