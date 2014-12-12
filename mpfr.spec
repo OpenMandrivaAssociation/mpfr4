@@ -15,16 +15,8 @@ Url:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
 BuildRequires:	gmp-devel
 %if %{with uclibc}
-# macro not in released rpm yet..
-%define lib_soname() %(\
-[ -e %{?!2:%{_libdir}}%{?2}/lib%{1}.so ] && \
-objdump -p %{?!2:%{_libdir}}%{?2}/lib%{1}.so | \
-grep -e SONAME | \
-sed -e 's#.*\\\(lib.*\\\)\$#\\\1#g' || \
-echo wtf
-)
 # for bootstrapping...
-BuildRequires:	uclibc-%(echo %{lib_soname gmp} | sed -e 's#lib#%{_lib}#' -e 's#\.so\.##')
+BuildRequires:	uclibc-%{_lib}gmp10
 BuildRequires:	uClibc-devel
 %endif
 
