@@ -18,7 +18,10 @@ BuildRequires:	gmp-devel
 # macro not in released rpm yet..
 %define lib_soname() %(\
 [ -e %{?!2:%{_libdir}}%{?2}/lib%{1}.so ] && \
-objdump -p %{?!2:%{_libdir}}%{?2}/lib%{1}.so | grep -e SONAME | sed -e 's#.*\\\(lib.*\\\)\$#\\\1#g'\
+objdump -p %{?!2:%{_libdir}}%{?2}/lib%{1}.so | \
+grep -e SONAME | \
+sed -e 's#.*\\\(lib.*\\\)\$#\\\1#g' || \
+echo wtf
 )
 # for bootstrapping...
 BuildRequires:	uclibc-%(echo %{lib_soname gmp} | sed -e 's#lib#%{_lib}#' -e 's#\.so\.##')
