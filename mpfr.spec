@@ -15,6 +15,8 @@ Url:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
 BuildRequires:	gmp-devel
 %if %{with uclibc}
+# for bootstrapping...
+BuildRequires:	uclibc-%(echo %{lib_soname gmp} | sed -e 's#lib#lib64#' -e 's#\.so\.##')
 BuildRequires:	uClibc-devel
 %endif
 
