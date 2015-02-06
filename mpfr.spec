@@ -8,7 +8,7 @@
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.2
-Release:	12
+Release:	13
 License:	LGPLv3+
 Group:		System/Libraries
 Url:		http://www.mpfr.org/
@@ -44,6 +44,9 @@ floating-point computations with correct rounding.
 Summary:	Development headers and libraries for MPFR
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
+%if %{with uclibc}
+Requires:	uclibc-%{libname} = %{EVRD}
+%endif
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
