@@ -8,15 +8,16 @@
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.3
-Release:	1
+Release:	2
 License:	LGPLv3+
 Group:		System/Libraries
 Url:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
+Source1:	%{name}.rpmlintrc
 BuildRequires:	gmp-devel
 %if %{with uclibc}
 # for bootstrapping...
-BuildRequires:	uclibc-%{_lib}gmp10
+BuildRequires:	uclibc-gmp-devel
 BuildRequires:	uClibc-devel
 %endif
 
@@ -32,6 +33,7 @@ Group:		System/Libraries
 The MPFR library is a C library for multiple-precision
 floating-point computations with correct rounding. 
 
+%if %{with uclibc}
 %package -n uclibc-%{libname}
 Summary:	Multiple-precision floating-point computations with correct rounding (uClibc)
 Group:		System/Libraries
@@ -40,13 +42,22 @@ Group:		System/Libraries
 The MPFR library is a C library for multiple-precision
 floating-point computations with correct rounding. 
 
+%package -n uclibc-%{devname}
+Summary:	Development headers and libraries for MPFR
+Group:		Development/C
+Requires:	uclibc-%{libname} = %{EVRD}
+Requires:	%{devname} = %{EVRD}
+Provides:	uclibc-%{name}-devel = %{EVRD}
+Conflicts:	%{devname} < 3.1.3-2
+
+%description -n uclibc-%{devname}
+The development headers and libraries for the MPFR library.
+%endif
+
 %package -n %{devname}
 Summary:	Development headers and libraries for MPFR
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
-%if %{with uclibc}
-Requires:	uclibc-%{libname} = %{EVRD}
-%endif
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
@@ -113,6 +124,10 @@ make -C glibc check
 %if %{with uclibc}
 %files -n uclibc-%{libname}
 %{uclibc_root}%{_libdir}/libmpfr.so.%{major}*
+
+%files -n uclibc-%{devname}
+%{uclibc_root}%{_libdir}/libmpfr.so
+%{uclibc_root}%{_libdir}/libmpfr.a
 %endif
 
 %files -n %{devname}
@@ -121,12 +136,6 @@ make -C glibc check
 %{_includedir}/mpf2mpfr.h
 %{_infodir}/mpfr.info*
 %{_libdir}/libmpfr.so
-%if %{with uclibc}
-%{uclibc_root}%{_libdir}/libmpfr.so
-%endif
 
 %files -n %{statname}
 %{_libdir}/libmpfr.a
-%if %{with uclibc}
-%{uclibc_root}%{_libdir}/libmpfr.a
-%endif
