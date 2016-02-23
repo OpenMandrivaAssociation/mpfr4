@@ -2,18 +2,22 @@
 %define libname	%mklibname %{name} %{major}
 %define devname	%mklibname %{name} -d
 %define statname %mklibname %{name} -d -s
+# -Oz causes the testsuite to crash
+%global optflags -Os -g
 %bcond_with	crosscompile
 %bcond_with	uclibc
 
 Summary:	Multiple-precision floating-point computations with correct rounding
 Name:		mpfr
 Version:	3.1.3
-Release:	4
+Release:	5
 License:	LGPLv3+
 Group:		System/Libraries
 Url:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
 Source1:	%{name}.rpmlintrc
+# Version from 2016-02-23
+Patch0:		http://www.mpfr.org/mpfr-current/allpatches
 BuildRequires:	gmp-devel
 %if %{with uclibc}
 # for bootstrapping...
@@ -74,6 +78,7 @@ Static libraries for the MPFR library.
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 CONFIGURE_TOP=$PWD
