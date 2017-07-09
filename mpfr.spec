@@ -67,6 +67,13 @@ export CXX=clang++
 	--with-gmp-lib=%{_prefix}/%{_target_platform}/sys-root%{_libdir} \
 %endif
 	--enable-thread-safe
+
+if "$?" != "0"; then
+	echo "configure failed, here's config.log:"
+	cat config.log
+	exit 1
+fi
+
 %make
 
 %install
