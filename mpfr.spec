@@ -53,6 +53,13 @@ Static libraries for the MPFR library.
 %apply_patches
 
 %build
+%ifarch %{arm}
+# For some reason, mpfr forces gcc
+# but gcc generates __modsi3 calls when it should
+# be generating __aeabi_modsi3 instead
+export CC=clang
+export CXX=clang++
+%endif
 %configure \
 	--enable-shared \
 	--enable-static \
