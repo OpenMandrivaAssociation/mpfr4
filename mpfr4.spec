@@ -3,19 +3,19 @@
 %define devname	%mklibname %{name} -d
 %define statname %mklibname %{name} -d -s
 %bcond_with crosscompile
+%bcond_with devel
 
 # (tpg) optimize it a bit
 %global optflags %optflags -O3
 
-Summary:	Multiple-precision floating-point computations with correct rounding
-Name:		mpfr
+Summary:	Old version of the MPFR library
+Name:		mpfr4
 Version:	3.1.6
-Release:	2
+Release:	3
 License:	LGPLv3+
 Group:		System/Libraries
 Url:		http://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
-Source1:	%{name}.rpmlintrc
 # (tpg) upstream patches
 Patch0:		http://www.mpfr.org/mpfr-current/patch01
 BuildRequires:	gmp-devel
@@ -23,6 +23,9 @@ BuildRequires:	gmp-devel
 %description
 The MPFR library is a C library for multiple-precision
 floating-point computations with correct rounding. 
+
+This is an old version provided for compatibility with
+legacy applications only. Use the mpfr package instead.
 
 %package -n %{libname}
 Summary:	Multiple-precision floating-point computations with correct rounding
@@ -32,6 +35,7 @@ Group:		System/Libraries
 The MPFR library is a C library for multiple-precision
 floating-point computations with correct rounding. 
 
+%if %{with devel}
 %package -n %{devname}
 Summary:	Development headers and libraries for MPFR
 Group:		Development/C
@@ -49,9 +53,10 @@ Provides:	%{name}-static-devel = %{EVRD}
 
 %description -n %{statname}
 Static libraries for the MPFR library.
+%endif
 
 %prep
-%setup -q
+%setup -qn mpfr-%{version}
 %apply_patches
 
 %build
@@ -65,7 +70,9 @@ export CXX=clang++
 
 %configure \
 	--enable-shared \
+%if %{with devel}
 	--enable-static \
+%endif
 %if %{with crosscompile}
 	--with-gmp-lib=%{_prefix}/%{_target_platform}/sys-root%{_libdir} \
 %endif
@@ -82,8 +89,17 @@ fi
 %install
 %makeinstall_std
 
+%if %{with devel}
 rm -rf installed-docs
 mv %{buildroot}%{_docdir}/%{name} installed-docs
+%endif
+
+%if ! %{with devel}
+rm -rf %{buildroot}%{_includedir} \
+	%{buildroot}%{_infodir} \
+	%{buildroot}%{_libdir}/*.so \
+	%{buildroot}%{_docdir}
+%endif
 
 %check
 make check
@@ -91,6 +107,7 @@ make check
 %files -n %{libname}
 %{_libdir}/libmpfr.so.%{major}*
 
+%if %{with devel}
 %files -n %{devname}
 %{_includedir}/mpfr.h
 %{_includedir}/mpf2mpfr.h
@@ -99,3 +116,4 @@ make check
 
 %files -n %{statname}
 %{_libdir}/libmpfr.a
+%endif
