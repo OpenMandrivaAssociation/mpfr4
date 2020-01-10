@@ -57,7 +57,7 @@ Static libraries for the MPFR library.
 
 %prep
 %setup -qn mpfr-%{version}
-%apply_patches
+%autopatch -p1
 
 %build
 %ifarch %{arm}
