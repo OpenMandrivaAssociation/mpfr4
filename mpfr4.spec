@@ -101,8 +101,10 @@ rm -rf %{buildroot}%{_includedir} \
 	%{buildroot}%{_docdir}
 %endif
 
+%ifnarch aarch64
 %check
 make check
+%endif
 
 %files -n %{libname}
 %{_libdir}/libmpfr.so.%{major}*
