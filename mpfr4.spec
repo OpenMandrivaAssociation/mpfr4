@@ -11,7 +11,7 @@
 Summary:	Old version of the MPFR library
 Name:		mpfr4
 Version:	3.1.6
-Release:	4
+Release:	5
 License:	LGPLv3+
 Group:		System/Libraries
 Url:		http://www.mpfr.org/
