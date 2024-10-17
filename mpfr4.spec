@@ -14,7 +14,7 @@ Version:	3.1.6
 Release:	5
 License:	LGPLv3+
 Group:		System/Libraries
-Url:		http://www.mpfr.org/
+Url:		https://www.mpfr.org/
 Source0:	http://www.mpfr.org/mpfr-current/mpfr-%{version}.tar.xz
 # (tpg) upstream patches
 Patch0:		http://www.mpfr.org/mpfr-current/patch01
